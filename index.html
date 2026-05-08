@@ -1000,6 +1000,148 @@
   </div>
 </div>
 
+<!-- KLINIS SCAN MODAL -->
+<div class="modal-overlay" id="klinisScanModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeKlinisModal()">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <div class="modal-header">
+      <h3>Klinis Live Scan</h3>
+      <p>Pindai ciri fisik pasien untuk identifikasi tanda-tanda klinis malnutrisi.</p>
+    </div>
+
+    <div class="scanner-layout">
+      <!-- Camera/Upload View -->
+      <div class="scanner-view">
+        <div class="video-container" id="klinisVideoContainer">
+          <div class="camera-placeholder" id="klinisPlaceholder">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+            <p>Memuat Kamera...</p>
+          </div>
+          <video id="klinis-camera-feed" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: none;"></video>
+          <img id="klinis-image-preview" class="image-preview" alt="Preview" style="display: none;" />
+          <div class="overlay-frame">
+            <div class="scan-line"></div>
+          </div>
+        </div>
+
+        <div class="scanner-actions">
+          <button class="btn btn-outline" onclick="document.getElementById('klinis-upload').click()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 7l-3 3.72L9 10.5l-4 5h14l-4-5.5z"/></svg>
+            Unggah Foto
+          </button>
+          <input type="file" id="klinis-upload" accept="image/*" onchange="handleKlinisUpload(event)" style="display:none;">
+          
+          <button class="btn btn-primary" onclick="scanKlinis()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+            Mulai Analisis
+          </button>
+        </div>
+      </div>
+
+      <!-- Results View -->
+      <div class="scanner-results">
+        <div class="empty-state" id="klinisEmptyState">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          <h4>Belum ada pindaian klinis</h4>
+          <p style="font-size: 13px; margin-top: 4px;">Pindai wajah, rambut, atau kulit untuk identifikasi klinis.</p>
+        </div>
+
+        <div class="loading-state" id="klinisLoadingState" style="display:none;">
+          <div class="spinner"></div>
+          <h4 style="color: var(--green-900);">AI Menganalisis...</h4>
+          <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">Memproses deteksi visual dari area klinis.</p>
+        </div>
+
+        <div class="result-content" id="klinisResultContent" style="display:none;">
+          <div class="food-name" id="klinisResTitle">Indikasi Anemia Ringan</div>
+          <div class="food-confidence">Tingkat Kecocokan AI: 87%</div>
+          <p style="font-size: 13px; color: var(--gray-800); margin-bottom: 16px;"><strong>Deteksi Visual:</strong> Kepucatan pada area konjungtiva dan kulit sekitar mata. Tidak ada indikasi <em>bitot spot</em> atau xeroftalmia.</p>
+          <div class="nutrition-details" style="background: white; padding: 12px; border-radius: 8px; border: 1px solid var(--gray-200);">
+            <div style="font-weight: 600; color: var(--green-800); margin-bottom: 6px; font-size: 13px;">Rekomendasi Lanjutan</div>
+            <p style="font-size: 12px; color: var(--gray-600); margin: 0;">Lakukan tes Hb darah untuk konfirmasi definitif. Sarankan konsumsi bahan pangan sumber zat besi tinggi (hati ayam, bayam, suplemen TTD jika diresepkan).</p>
+          </div>
+          
+          <button class="btn btn-outline" style="width: 100%; margin-top: 16px; padding: 10px; border-radius: 8px; border: 1px solid var(--green-400); background: transparent; color: var(--green-600); cursor: pointer;" onclick="resetKlinisScanner()">
+            Scan Pasien Lain
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIETARY ASSESSMENT MODAL -->
+<div class="modal-overlay" id="dietaryModal">
+  <div class="modal-content" style="max-width: 600px;">
+    <button class="modal-close" onclick="closeDietaryModal()">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <div class="modal-header">
+      <h3>Dietary Assessment & Analisis Risiko</h3>
+      <p>Isi formulir pola makan harian untuk mendapatkan analisis risiko kesehatan dan rekomendasi intervensi dari AI Gizi.</p>
+    </div>
+
+    <div class="calc-form" id="dietaryFormContainer">
+      <div class="calc-col">
+        <label class="calc-label">1. Berapa kali Anda mengonsumsi makanan utama (nasi, lauk pauk) dalam sehari?</label>
+        <select class="calc-select" id="diet-freq">
+          <option value="1">1 kali sehari</option>
+          <option value="2">2 kali sehari</option>
+          <option value="3" selected>3 kali sehari</option>
+          <option value="4">Lebih dari 3 kali sehari</option>
+        </select>
+      </div>
+      <div class="calc-col">
+        <label class="calc-label">2. Berapa porsi sayur dan buah yang Anda konsumsi setiap hari?</label>
+        <select class="calc-select" id="diet-veg">
+          <option value="0">Jarang / Tidak makan sayur & buah</option>
+          <option value="1">1-2 porsi sehari</option>
+          <option value="2" selected>3-4 porsi sehari</option>
+          <option value="3">Lebih dari 5 porsi sehari</option>
+        </select>
+      </div>
+      <div class="calc-col">
+        <label class="calc-label">3. Seberapa sering Anda mengonsumsi makanan manis atau gorengan dalam seminggu?</label>
+        <select class="calc-select" id="diet-sweet">
+          <option value="jarang">Jarang (1-2 kali seminggu)</option>
+          <option value="sedang" selected>Sedang (3-4 kali seminggu)</option>
+          <option value="sering">Sering (Setiap hari)</option>
+        </select>
+      </div>
+      <div class="calc-col">
+        <label class="calc-label">4. Apakah Anda memiliki keluhan kesehatan fisik saat ini?</label>
+        <select class="calc-select" id="diet-health">
+          <option value="tidak">Tidak ada keluhan</option>
+          <option value="lelah" selected>Sering merasa lelah / lesu / mengantuk</option>
+          <option value="pencernaan">Gangguan pencernaan (Sembelit / Diare / Maag)</option>
+        </select>
+      </div>
+
+      <button class="btn-primary" style="margin-top: 8px; width: 100%; justify-content: center;" onclick="analyzeDietary()">
+        <svg width="18" height="18" fill="white" viewBox="0 0 24 24" style="margin-right: 6px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Analisis dengan AI
+      </button>
+
+      <div class="loading-state" id="dietaryLoading" style="display: none; padding: 30px 0;">
+        <div class="spinner"></div>
+        <h4 style="color: var(--green-900);">AI Menganalisis...</h4>
+        <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">Mengintegrasikan data pola makan dan keluhan kesehatan...</p>
+      </div>
+
+      <div class="diet-result-box" id="dietaryResult">
+        <div class="diet-result-header">
+          <span>🤖</span> Analisis Risiko & Rekomendasi
+        </div>
+        <div class="diet-result-text" id="dietaryResultText">
+          <!-- AI Content populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
