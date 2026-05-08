@@ -626,21 +626,21 @@
     <h2 class="section-title">DSS Gizi Berbasis AI</h2>
     <p class="section-sub">Sistem pendukung keputusan gizi yang komprehensif — dari pengukuran antropometri hingga rekomendasi berbasis data.</p>
     <div class="dss-grid">
-      <div class="dss-card reveal" onclick="openCalculatorModal()" style="cursor: pointer; border-color: var(--green-400); background: rgba(29, 158, 117, 0.15);">
+      <a href="antropometri.html" class="dss-card reveal" style="text-decoration:none;color:inherit;cursor:pointer; border-color: var(--green-400); background: rgba(29, 158, 117, 0.15);">
         <div class="dss-number">01</div>
         <h4>Antropometri & Kalkulator</h4>
         <p>Input tinggi badan, berat badan, dan parameter lain. Sistem menghitung IMT, z-score, status gizi secara otomatis.</p>
-      </div>
-      <div class="dss-card reveal" onclick="openKlinisModal()" style="cursor: pointer; border-color: var(--green-400); background: rgba(29, 158, 117, 0.15);">
+      </a>
+      <a href="klinis.html" class="dss-card reveal" style="text-decoration:none;color:inherit;cursor:pointer; border-color: var(--green-400); background: rgba(29, 158, 117, 0.15);">
         <div class="dss-number">02</div>
         <h4>Klinis (Live Scan)</h4>
         <p>Analisis klinis pasien melalui foto langsung dari kamera. Identifikasi tanda-tanda klinis malnutrisi.</p>
-      </div>
-      <div class="dss-card reveal" onclick="openDietaryModal()" style="cursor: pointer; border-color: var(--green-400); background: rgba(29, 158, 117, 0.15);">
+      </a>
+      <a href="dietary.html" class="dss-card reveal" style="text-decoration:none;color:inherit;cursor:pointer; border-color: var(--green-400); background: rgba(29, 158, 117, 0.15);">
         <div class="dss-number">03</div>
         <h4>Dietary Assessment</h4>
         <p>Formulir pola makan terstruktur. AI meringkas dan menyimpulkan pola konsumsi secara otomatis.</p>
-      </div>
+      </a>
       <div class="dss-card reveal">
         <div class="dss-number">04</div>
         <h4>Analisis Risiko</h4>
@@ -889,33 +889,7 @@
   </div>
 </div>
 
-<!-- CALCULATOR MODAL -->
-<div class="modal-overlay" id="calculatorModal">
-  <div class="modal-content" style="max-width: 850px;">
-    <button class="modal-close" onclick="closeCalculatorModal()">
-      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-    </button>
-    <div class="modal-header">
-      <h3>Antropometri & Kalkulator Gizi</h3>
-      <p>Hitung Indeks Massa Tubuh (IMT), Status Gizi, serta kebutuhan kalori harian (TDEE).</p>
-    </div>
 
-    <div class="calc-layout">
-      <div class="calc-form">
-        <div class="calc-row">
-          <div class="calc-col">
-            <label class="calc-label">Jenis Kelamin</label>
-            <div class="radio-group">
-              <div class="radio-btn">
-                <input type="radio" name="gender" id="g-male" value="male" checked onchange="calculateNutrition()">
-                <label for="g-male">Pria</label>
-              </div>
-              <div class="radio-btn">
-                <input type="radio" name="gender" id="g-female" value="female" onchange="calculateNutrition()">
-                <label for="g-female">Wanita</label>
-              </div>
-            </div>
-          </div>
           <div class="calc-col">
             <label class="calc-label">Usia (Tahun)</label>
             <input type="number" class="calc-input" id="calc-age" value="25" min="15" max="100" oninput="calculateNutrition()">
@@ -1000,31 +974,7 @@
   </div>
 </div>
 
-<!-- KLINIS SCAN MODAL -->
-<div class="modal-overlay" id="klinisScanModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeKlinisModal()">
-      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-    </button>
-    <div class="modal-header">
-      <h3>Klinis Live Scan</h3>
-      <p>Pindai ciri fisik pasien untuk identifikasi tanda-tanda klinis malnutrisi.</p>
-    </div>
 
-    <div class="scanner-layout">
-      <!-- Camera/Upload View -->
-      <div class="scanner-view">
-        <div class="video-container" id="klinisVideoContainer">
-          <div class="camera-placeholder" id="klinisPlaceholder">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
-            <p>Memuat Kamera...</p>
-          </div>
-          <video id="klinis-camera-feed" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: none;"></video>
-          <img id="klinis-image-preview" class="image-preview" alt="Preview" style="display: none;" />
-          <div class="overlay-frame">
-            <div class="scan-line"></div>
-          </div>
-        </div>
 
         <div class="scanner-actions">
           <button class="btn btn-outline" onclick="document.getElementById('klinis-upload').click()">
@@ -1072,73 +1022,7 @@
   </div>
 </div>
 
-<!-- DIETARY ASSESSMENT MODAL -->
-<div class="modal-overlay" id="dietaryModal">
-  <div class="modal-content" style="max-width: 600px;">
-    <button class="modal-close" onclick="closeDietaryModal()">
-      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-    </button>
-    <div class="modal-header">
-      <h3>Dietary Assessment & Analisis Risiko</h3>
-      <p>Isi formulir pola makan harian untuk mendapatkan analisis risiko kesehatan dan rekomendasi intervensi dari AI Gizi.</p>
-    </div>
 
-    <div class="calc-form" id="dietaryFormContainer">
-      <div class="calc-col">
-        <label class="calc-label">1. Berapa kali Anda mengonsumsi makanan utama (nasi, lauk pauk) dalam sehari?</label>
-        <select class="calc-select" id="diet-freq">
-          <option value="1">1 kali sehari</option>
-          <option value="2">2 kali sehari</option>
-          <option value="3" selected>3 kali sehari</option>
-          <option value="4">Lebih dari 3 kali sehari</option>
-        </select>
-      </div>
-      <div class="calc-col">
-        <label class="calc-label">2. Berapa porsi sayur dan buah yang Anda konsumsi setiap hari?</label>
-        <select class="calc-select" id="diet-veg">
-          <option value="0">Jarang / Tidak makan sayur & buah</option>
-          <option value="1">1-2 porsi sehari</option>
-          <option value="2" selected>3-4 porsi sehari</option>
-          <option value="3">Lebih dari 5 porsi sehari</option>
-        </select>
-      </div>
-      <div class="calc-col">
-        <label class="calc-label">3. Seberapa sering Anda mengonsumsi makanan manis atau gorengan dalam seminggu?</label>
-        <select class="calc-select" id="diet-sweet">
-          <option value="jarang">Jarang (1-2 kali seminggu)</option>
-          <option value="sedang" selected>Sedang (3-4 kali seminggu)</option>
-          <option value="sering">Sering (Setiap hari)</option>
-        </select>
-      </div>
-      <div class="calc-col">
-        <label class="calc-label">4. Apakah Anda memiliki keluhan kesehatan fisik saat ini?</label>
-        <select class="calc-select" id="diet-health">
-          <option value="tidak">Tidak ada keluhan</option>
-          <option value="lelah" selected>Sering merasa lelah / lesu / mengantuk</option>
-          <option value="pencernaan">Gangguan pencernaan (Sembelit / Diare / Maag)</option>
-        </select>
-      </div>
-
-      <button class="btn-primary" style="margin-top: 8px; width: 100%; justify-content: center;" onclick="analyzeDietary()">
-        <svg width="18" height="18" fill="white" viewBox="0 0 24 24" style="margin-right: 6px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-        Analisis dengan AI
-      </button>
-
-      <div class="loading-state" id="dietaryLoading" style="display: none; padding: 30px 0;">
-        <div class="spinner"></div>
-        <h4 style="color: var(--green-900);">AI Menganalisis...</h4>
-        <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">Mengintegrasikan data pola makan dan keluhan kesehatan...</p>
-      </div>
-
-      <div class="diet-result-box" id="dietaryResult">
-        <div class="diet-result-header">
-          <span>🤖</span> Analisis Risiko & Rekomendasi
-        </div>
-        <div class="diet-result-text" id="dietaryResultText">
-          <!-- AI Content populated by JS -->
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1277,224 +1161,6 @@
     }
   }
 
-  // ===== CALCULATOR MODAL LOGIC =====
-  const calcModal = document.getElementById('calculatorModal');
-  
-  function openCalculatorModal() {
-    calcModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    calculateNutrition(); // initial calculation
-  }
-
-  function closeCalculatorModal() {
-    calcModal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  calcModal.addEventListener('click', (e) => {
-    if (e.target === calcModal) closeCalculatorModal();
-  });
-
-  function calculateNutrition() {
-    const age = parseFloat(document.getElementById('calc-age').value) || 0;
-    const weight = parseFloat(document.getElementById('calc-weight').value) || 0;
-    const height = parseFloat(document.getElementById('calc-height').value) || 0;
-    const isMale = document.getElementById('g-male').checked;
-    const activityMultiplier = parseFloat(document.getElementById('calc-activity').value);
-    
-    let goal = 'maintain';
-    if (document.getElementById('goal-lose').checked) goal = 'lose';
-    if (document.getElementById('goal-gain').checked) goal = 'gain';
-
-    if (age <= 0 || weight <= 0 || height <= 0) return;
-
-    // Mifflin-St Jeor Equation for BMR
-    let bmr = (10 * weight) + (6.25 * height) - (5 * age);
-    bmr += isMale ? 5 : -161;
-
-    // TDEE
-    const tdee = bmr * activityMultiplier;
-
-    // Target Calories
-    let targetCals = tdee;
-    let desc = 'Kalori untuk menjaga berat badan Anda saat ini.';
-    if (goal === 'lose') {
-      targetCals = tdee - 500; // 500 cal deficit
-      desc = 'Kalori defisit untuk menurunkan berat badan (sekitar 0.5 kg/minggu).';
-    } else if (goal === 'gain') {
-      targetCals = tdee + 300; // 300 cal surplus
-      desc = 'Kalori surplus untuk menaikkan berat badan dan massa otot secara sehat.';
-    }
-
-    // Macro split
-    let carbPct = 0.50, proPct = 0.25, fatPct = 0.25;
-    if (goal === 'lose') {
-      carbPct = 0.40; proPct = 0.35; fatPct = 0.25;
-    } else if (goal === 'gain') {
-      carbPct = 0.50; proPct = 0.25; fatPct = 0.25;
-    }
-
-    const carbs = (targetCals * carbPct) / 4; // 4 cals per gram
-    const protein = (targetCals * proPct) / 4;
-    const fat = (targetCals * fatPct) / 9; // 9 cals per gram
-
-    // BMI
-    const heightInMeters = height / 100;
-    const bmi = weight / (heightInMeters * heightInMeters);
-    let bmiStatus = '';
-    if (bmi < 18.5) bmiStatus = 'Kurus';
-    else if (bmi < 25) bmiStatus = 'Normal';
-    else if (bmi < 30) bmiStatus = 'Gemuk';
-    else bmiStatus = 'Obesitas';
-
-    // Update DOM
-    document.getElementById('res-bmi').innerText = bmi.toFixed(1) + ' (' + bmiStatus + ')';
-    document.getElementById('res-bmr').innerText = Math.round(bmr).toLocaleString() + ' kkal';
-    document.getElementById('res-tdee').innerText = Math.round(tdee).toLocaleString() + ' kkal';
-    document.getElementById('res-target-cals').innerText = Math.round(targetCals).toLocaleString();
-    document.getElementById('res-goal-desc').innerText = desc;
-
-    document.getElementById('res-carbs').innerText = Math.round(carbs) + 'g';
-    document.getElementById('res-protein').innerText = Math.round(protein) + 'g';
-    document.getElementById('res-fat').innerText = Math.round(fat) + 'g';
-  }
-
-  // ===== KLINIS LIVE SCAN LOGIC =====
-  const klinisModal = document.getElementById('klinisScanModal');
-  const klinisVideo = document.getElementById('klinis-camera-feed');
-  const klinisImagePreview = document.getElementById('klinis-image-preview');
-  const klinisPlaceholder = document.getElementById('klinisPlaceholder');
-  const klinisVideoContainer = document.getElementById('klinisVideoContainer');
-  let klinisStream = null;
-
-  function openKlinisModal() {
-    klinisModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    initKlinisCamera();
-  }
-
-  function closeKlinisModal() {
-    klinisModal.classList.remove('active');
-    document.body.style.overflow = '';
-    if (klinisStream) {
-      klinisStream.getTracks().forEach(track => track.stop());
-      klinisStream = null;
-    }
-    resetKlinisScanner();
-  }
-
-  klinisModal.addEventListener('click', (e) => {
-    if (e.target === klinisModal) closeKlinisModal();
-  });
-
-  async function initKlinisCamera() {
-    try {
-      klinisStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-      klinisVideo.srcObject = klinisStream;
-      klinisPlaceholder.style.display = 'none';
-      klinisVideo.style.display = 'block';
-      klinisImagePreview.style.display = 'none';
-    } catch (err) {
-      console.error("Error accessing camera:", err);
-      klinisPlaceholder.innerHTML = '<p style="color:#ff6b6b; font-size:13px;">Kamera tidak dapat diakses.</p>';
-    }
-  }
-
-  function handleKlinisUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        if(klinisStream) { klinisStream.getTracks().forEach(track => track.stop()); klinisStream = null; }
-        klinisVideo.style.display = 'none';
-        klinisPlaceholder.style.display = 'none';
-        klinisImagePreview.src = e.target.result;
-        klinisImagePreview.style.display = 'block';
-      }
-      reader.readAsDataURL(file);
-    }
-  }
-
-  function scanKlinis() {
-    klinisVideoContainer.classList.add('scanning-active');
-    document.getElementById('klinisEmptyState').style.display = 'none';
-    document.getElementById('klinisResultContent').style.display = 'none';
-    document.getElementById('klinisLoadingState').style.display = 'flex';
-
-    setTimeout(() => {
-      klinisVideoContainer.classList.remove('scanning-active');
-      document.getElementById('klinisLoadingState').style.display = 'none';
-      document.getElementById('klinisResultContent').style.display = 'block';
-    }, 2500);
-  }
-
-  function resetKlinisScanner() {
-    document.getElementById('klinisResultContent').style.display = 'none';
-    document.getElementById('klinisLoadingState').style.display = 'none';
-    document.getElementById('klinisEmptyState').style.display = 'flex';
-    document.getElementById('klinis-upload').value = '';
-    if (klinisModal.classList.contains('active')) initKlinisCamera();
-  }
-
-  // ===== DIETARY ASSESSMENT LOGIC =====
-  const dietModal = document.getElementById('dietaryModal');
-
-  function openDietaryModal() {
-    dietModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('dietaryResult').style.display = 'none';
-    document.getElementById('dietaryLoading').style.display = 'none';
-    document.querySelector('#dietaryFormContainer .btn-primary').style.display = 'flex';
-  }
-
-  function closeDietaryModal() {
-    dietModal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  dietModal.addEventListener('click', (e) => {
-    if (e.target === dietModal) closeDietaryModal();
-  });
-
-  function analyzeDietary() {
-    const btn = document.querySelector('#dietaryFormContainer .btn-primary');
-    btn.style.display = 'none';
-    document.getElementById('dietaryResult').style.display = 'none';
-    document.getElementById('dietaryLoading').style.display = 'flex';
-
-    setTimeout(() => {
-      document.getElementById('dietaryLoading').style.display = 'none';
-      btn.style.display = 'flex';
-      
-      const freq = document.getElementById('diet-freq').value;
-      const veg = document.getElementById('diet-veg').value;
-      const sweet = document.getElementById('diet-sweet').value;
-      const health = document.getElementById('diet-health').value;
-
-      let risikoHTML = '<strong>Risiko Gizi (04 Analisis Risiko):</strong><ul>';
-      if (veg == '0' || veg == '1') risikoHTML += '<li>Asupan serat dan mikronutrien (vitamin/mineral) yang rendah, rentan terhadap konstipasi atau avitaminosis.</li>';
-      if (sweet == 'sering') risikoHTML += '<li>Potensi asupan energi berlebih dari karbohidrat sederhana, meningkatkan risiko hiperglikemia / obesitas.</li>';
-      if (health == 'lelah') risikoHTML += '<li>Terdapat keluhan asthenia (lelah/lesu), yang berkorelasi dengan indikasi anemia atau defisit kalori.</li>';
-      if (health == 'pencernaan') risikoHTML += '<li>Gangguan fungsi gastrointestinal (saluran cerna) yang membutuhkan penyesuaian serat/cairan.</li>';
-      if (freq == '1' || freq == '2') risikoHTML += '<li>Pola makan tidak teratur, risiko hipoglikemia di antara waktu makan besar.</li>';
-      
-      // Default if everything is fine
-      if (!risikoHTML.includes('<li>')) risikoHTML += '<li>Pola makan relatif aman, tidak ditemukan risiko tinggi yang signifikan.</li>';
-      risikoHTML += '</ul>';
-
-      let rekomendasiHTML = '<strong>Rekomendasi AI (05 Rekomendasi):</strong><ul>';
-      if (veg == '0' || veg == '1') rekomendasiHTML += '<li>Tingkatkan konsumsi sayur minimal 250 gram/hari dan buah 150 gram/hari (sesuai pedoman Isi Piringku).</li>';
-      if (sweet == 'sering') rekomendasiHTML += '<li>Batasi makanan/minuman manis maksimal 4 sendok makan gula per hari.</li>';
-      if (health == 'lelah') rekomendasiHTML += '<li>Periksa profil darah (Hb) dan pastikan kebutuhan kalori basal (BMR) Anda terpenuhi setiap hari. Konsumsi protein bernilai biologi tinggi.</li>';
-      if (health == 'pencernaan') rekomendasiHTML += '<li>Fokus pada asupan tinggi probiotik (misal yogurt), air putih >2 liter/hari, dan sesuaikan porsi serat secara bertahap.</li>';
-      
-      if (!rekomendasiHTML.includes('<li>')) rekomendasiHTML += '<li>Pertahankan pola makan seimbang Anda saat ini. Lakukan evaluasi secara berkala.</li>';
-      rekomendasiHTML += '</ul>';
-
-      document.getElementById('dietaryResultText').innerHTML = risikoHTML + '<br>' + rekomendasiHTML;
-      document.getElementById('dietaryResult').style.display = 'block';
-    }, 2500);
-  }
-</script>
+  </script>
 </body>
 </html>
