@@ -41,7 +41,13 @@ body {
     radial-gradient(circle at 82% 70%, rgba(18, 164, 111, 0.16), transparent 30rem),
     linear-gradient(135deg, #fbfcf7 0%, #eef7f0 100%);
   line-height: 1.55;
-  padding-left: var(--sidebar);
+  padding-left: 0;
+  overflow-x: hidden;
+  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.nav-open {
+  padding-left: 248px;
 }
 
 .anthro-page {
@@ -59,14 +65,22 @@ a {
 .site-header {
   position: fixed;
   width: 248px;
-  inset: 0 auto 0 0;
-  z-index: 30;
+  top: 0;
+  bottom: 0;
+  left: -248px;
+  z-index: 50;
   padding: 18px;
+  padding-top: 80px;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   background:
     linear-gradient(180deg, rgba(6, 63, 52, 0.96), rgba(24, 33, 30, 0.97)),
     radial-gradient(circle at 20% 10%, rgba(18, 164, 111, 0.55), transparent 12rem);
   color: var(--white);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header.open {
+  left: 0;
 }
 
 .nav {
@@ -186,14 +200,31 @@ a {
 }
 
 .nav-toggle {
-  display: none;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 60;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--green), var(--indigo));
   color: var(--white);
-  font-size: 22px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(18, 164, 111, 0.25);
+  transition: transform 0.2s, left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.nav-open .nav-toggle {
+  left: calc(248px + 18px);
+}
+
+.nav-toggle:hover {
+  transform: translateY(-2px);
 }
 
 .hero,
