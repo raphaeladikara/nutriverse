@@ -1,15 +1,17 @@
 const navToggle = document.querySelector("[data-nav-toggle]");
-const navLinks = document.querySelector("[data-nav-links]");
+const siteHeader = document.querySelector(".site-header");
 
-if (navToggle && navLinks) {
+if (navToggle && siteHeader) {
   navToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
+    siteHeader.classList.toggle("open");
+    document.body.classList.toggle("nav-open");
   });
 }
 
 document.querySelectorAll("[data-nav-links] a").forEach((link) => {
   link.addEventListener("click", () => {
-    navLinks?.classList.remove("open");
+    siteHeader?.classList.remove("open");
+    document.body.classList.remove("nav-open");
   });
 });
 
@@ -278,3 +280,82 @@ function initAnthropometryDss() {
 }
 
 initAnthropometryDss();
+
+function initClinicalScanner() {
+  const scannerContainer = document.getElementById('clinical-scanner');
+  if (!scannerContainer) return;
+
+  const video = document.getElementById('camera-feed');
+  const canvas = document.getElementById('camera-canvas');
+  const resultImg = document.getElementById('capture-result');
+  const placeholder = document.getElementById('camera-placeholder');
+  
+  const btnStart = document.getElementById('btn-start-camera');
+  const btnTake = document.getElementById('btn-take-picture');
+  const btnRetake = document.getElementById('btn-retake-picture');
+  
+  let stream = null;
+
+  async function startCamera() {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+      video.srcObject = stream;
+      video.style.display = 'block';
+      placeholder.style.display = 'none';
+      resultImg.style.display = 'none';
+      
+      btnStart.style.display = 'none';
+      btnTake.style.display = 'inline-block';
+      btnRetake.style.display = 'none';
+    } catch (err) {
+      console.error("Error accessing camera:", err);
+      alert("Tidak dapat mengakses kamera. Pastikan izin kamera telah diberikan.");
+    }
+  }
+
+  function stopCamera() {
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+      stream = null;
+    }
+  }
+
+  function takePicture() {
+    if (!stream) return;
+    
+    // Set canvas dimensions to match video
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
+    
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    const dataUrl = canvas.toDataURL('image/png');
+    resultImg.src = dataUrl;
+    
+    video.style.display = 'none';
+    resultImg.style.display = 'block';
+    
+    btnTake.style.display = 'none';
+    btnRetake.style.display = 'inline-block';
+  }
+
+  function retakePicture() {
+    if (!stream || !stream.active) {
+       startCamera();
+    } else {
+       video.style.display = 'block';
+       resultImg.style.display = 'none';
+       btnTake.style.display = 'inline-block';
+       btnRetake.style.display = 'none';
+    }
+  }
+
+  btnStart?.addEventListener('click', startCamera);
+  btnTake?.addEventListener('click', takePicture);
+  btnRetake?.addEventListener('click', retakePicture);
+  
+  window.addEventListener('beforeunload', stopCamera);
+}
+
+initClinicalScanner();
