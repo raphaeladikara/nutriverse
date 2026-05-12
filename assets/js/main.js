@@ -3,8 +3,9 @@ const siteHeader = document.querySelector(".site-header");
 
 if (navToggle && siteHeader) {
   navToggle.addEventListener("click", () => {
-    siteHeader.classList.toggle("open");
+    const isOpen = siteHeader.classList.toggle("open");
     document.body.classList.toggle("nav-open");
+    navToggle.innerHTML = isOpen ? "&times;" : "=";
   });
 }
 
@@ -12,6 +13,7 @@ document.querySelectorAll("[data-nav-links] a").forEach((link) => {
   link.addEventListener("click", () => {
     siteHeader?.classList.remove("open");
     document.body.classList.remove("nav-open");
+    if (navToggle) navToggle.innerHTML = "=";
   });
 });
 
@@ -359,3 +361,4 @@ function initClinicalScanner() {
 }
 
 initClinicalScanner();
+
