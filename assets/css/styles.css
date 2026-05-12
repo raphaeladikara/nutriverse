@@ -1314,7 +1314,7 @@ tr:last-child td {
 }
 
 @media (max-width: 980px) {
-  body {
+  body, body.nav-open {
     padding-left: 0;
   }
 
@@ -1347,9 +1347,12 @@ tr:last-child td {
     font-size: 14px;
   }
 
-  .nav-toggle {
+  .nav-toggle, body.nav-open .nav-toggle {
     display: inline-grid;
     place-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
   }
 
   .nav-links {
@@ -1364,7 +1367,7 @@ tr:last-child td {
     box-shadow: var(--shadow);
   }
 
-  .nav-links.open {
+  .site-header.open .nav-links {
     display: flex;
   }
 
