@@ -24,15 +24,27 @@
   <main>
     <section class="page-hero">
       <span class="eyebrow">NutriSolve / Clinical</span>
-      <h1>Clinical Nutrition Screening sebagai Scan Visual untuk simulasi pembelajaran.</h1>
-      <p class="lead">Desain ini memperlihatkan area observasi klinis tanpa akses kamera atau analisis otomatis. Tujuannya agar halaman tetap jelas sebelum fitur sungguhan dibuat.</p>
+      <h1>Clinical Nutrition Screening</h1>
+      <p class="lead">Gunakan kamera untuk mengambil area observasi klinis (wajah, rambut, kulit, mulut) untuk dianalisis oleh tenaga medis atau sistem.</p>
     </section>
     <section class="section">
       <div class="section-inner grid two">
-        <div class="mockup">
+        <div class="mockup" id="clinical-scanner">
           <h2>Scan Visual</h2>
-          <div class="scan-frame">Frame observasi klinis</div>
-          <p class="muted">Simulasi Pembelajaran: area ini adalah placeholder untuk foto wajah, rambut, kulit, atau mata.</p>
+          <div class="scan-container" style="position: relative; width: 100%; aspect-ratio: 4/3; background: #222; overflow: hidden; border-radius: 8px; margin-bottom: 1rem; border: 1px solid var(--border-color);">
+            <video id="camera-feed" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: none;"></video>
+            <img id="capture-result" style="width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: none;" alt="Captured scan">
+            <div id="camera-placeholder" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); background: #1a1a1a;">
+              <span>Kamera Nonaktif</span>
+            </div>
+            <canvas id="camera-canvas" style="display: none;"></canvas>
+          </div>
+          <div class="scan-controls" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="button primary" id="btn-start-camera" style="cursor: pointer;">Aktifkan Kamera</button>
+            <button class="button primary" id="btn-take-picture" style="cursor: pointer; display: none;">Ambil Foto</button>
+            <button class="button secondary" id="btn-retake-picture" style="cursor: pointer; display: none;">Foto Ulang</button>
+          </div>
+          <p class="muted" style="margin-top: 1rem;">Izinkan akses kamera untuk memulai proses screening visual.</p>
         </div>
         <div class="mockup">
           <h2>Panel Hasil Contoh</h2>
